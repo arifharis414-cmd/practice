@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PURELIX — Premium Water</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#050508;
+  --deep:#0d0d14;
+  --cyan:#00d4ff;
+  --cyan2:#0099cc;
+  --silver:#7a8fa6;
+  --white:#f0f6ff;
+  --glass:rgba(255,255,255,0.05);
+  --glass-border:rgba(255,255,255,0.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
+
+/* CUSTOM CURSOR */
+#cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:screen}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,212,255,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.08s ease}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.4rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+nav.scrolled{
+  background:rgba(5,5,8,0.4);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-bottom:1px solid var(--glass-border);
+  padding:1rem 4rem;
+}
+nav.scrolled .nav-logo{
+  color:rgba(255,255,255,0.9);
+  text-shadow:0 0 30px rgba(0,212,255,0.5);
+}
+nav.scrolled .nav-links a{
+  color:rgba(255,255,255,0.8);
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:0.15em;
+  color:var(--white);
+  text-decoration:none;
+  transition:all 0.4s;
+}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,0.6);
+  text-decoration:none;
+  font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;
+  font-weight:500;
+  position:relative;transition:color 0.3s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:var(--cyan);transform:scaleX(0);transition:transform 0.3s;
+}
+.nav-links a:hover{color:var(--cyan)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{
+  background:transparent;border:1px solid rgba(0,212,255,0.5);
+  color:var(--cyan);padding:0.55rem 1.6rem;border-radius:2px;
+  font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;
+  cursor:none;transition:all 0.3s;font-family:'Inter',sans-serif;
+}
+.nav-cta:hover{background:var(--cyan);color:var(--black)}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,100,180,0.12) 0%, transparent 70%),
+             radial-gradient(ellipse 40% 40% at 80% 60%, rgba(0,212,255,0.06) 0%, transparent 60%),
+             var(--black);
+}
+.hero-bg-lines{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 4rem;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:2rem;width:100%;max-width:1400px;margin:0 auto;
+}
+.hero-text{position:relative}
+.hero-eyebrow{
+  font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:1.2rem;font-weight:500;
+  display:flex;align-items:center;gap:0.8rem;
+}
+.hero-eyebrow::before{content:'';width:30px;height:1px;background:var(--cyan)}
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,10vw,10rem);
+  line-height:0.9;letter-spacing:0.02em;
+  color:var(--white);margin-bottom:1.5rem;
+}
+h1 .word-hover{display:inline-block;transition:color 0.3s}
+h1 .word-hover:hover{color:var(--cyan)}
+h1 .accent{color:var(--cyan)}
+.hero-desc{
+  font-size:1rem;line-height:1.7;color:var(--silver);
+  max-width:420px;margin-bottom:2.5rem;font-weight:300;letter-spacing:0.02em;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  background:var(--cyan);color:var(--black);
+  padding:0.9rem 2.5rem;border:none;border-radius:2px;
+  font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;
+  cursor:none;transition:all 0.3s;font-family:'Inter',sans-serif;
+  position:relative;overflow:hidden;
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  transform:translateX(-100%);transition:transform 0.5s;
+}
+.btn-primary:hover::before{transform:translateX(100%)}
+.btn-primary:hover{background:#00b8e0;transform:translateY(-1px)}
+.btn-outline{
+  background:transparent;color:var(--white);
+  padding:0.9rem 2.5rem;border:1px solid rgba(255,255,255,0.2);border-radius:2px;
+  font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;
+  cursor:none;transition:all 0.3s;font-family:'Inter',sans-serif;
+}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* 3D BOTTLE */
+.hero-bottle{
+  display:flex;justify-content:center;align-items:center;
+  perspective:1200px;position:relative;
+}
+.bottle-wrapper{
+  width:220px;position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.1s ease-out;
+  filter:drop-shadow(0 0 60px rgba(0,212,255,0.25));
+}
+.bottle-wrapper:hover{filter:drop-shadow(0 0 80px rgba(0,212,255,0.4))}
+
+/* SVG Bottle */
+.bottle-svg{width:100%;height:auto}
+.bottle-glow{
+  position:absolute;inset:-30%;
+  background:radial-gradient(ellipse at center, rgba(0,212,255,0.12) 0%, transparent 70%);
+  pointer-events:none;animation:pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+
+/* STATS */
+.hero-stats{
+  display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.stat-item{}
+.stat-num{
+  font-family:'Bebas Neue',sans-serif;font-size:2.2rem;
+  color:var(--white);letter-spacing:0.05em;line-height:1;
+}
+.stat-num span{color:var(--cyan)}
+.stat-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);margin-top:0.2rem}
+
+/* SCROLL INDICATOR */
+.scroll-indicator{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  color:var(--silver);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+}
+.scroll-line{
+  width:1px;height:50px;background:linear-gradient(to bottom, rgba(0,212,255,0.6), transparent);
+  animation:scroll-drop 2s ease-in-out infinite;
+}
+@keyframes scroll-drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* FEATURES SECTION */
+.section{padding:8rem 4rem;position:relative}
+.section-inner{max-width:1300px;margin:0 auto}
+.section-label{
+  font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:1rem;
+  display:flex;align-items:center;gap:0.8rem;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,6vw,6rem);
+  line-height:0.95;letter-spacing:0.02em;
+  margin-bottom:1rem;
+}
+.section-title .hover-text{display:inline-block;transition:color 0.3s}
+.section-title .hover-text:hover{color:var(--cyan)}
+
+/* FEATURES GRID */
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;
+  margin-top:5rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);
+}
+.feature-card{
+  background:var(--black);padding:3rem 2.5rem;
+  position:relative;overflow:hidden;
+  transition:background 0.4s;
+}
+.feature-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, var(--cyan), transparent);
+  transform:scaleX(0);transition:transform 0.5s;
+}
+.feature-card:hover{background:rgba(0,212,255,0.03)}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-icon{
+  width:48px;height:48px;border:1px solid rgba(0,212,255,0.3);
+  border-radius:2px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.8rem;position:relative;
+}
+.feature-icon svg{width:22px;height:22px;stroke:var(--cyan);fill:none;stroke-width:1.5}
+.feature-num{
+  position:absolute;top:-10px;right:-10px;
+  font-family:'Bebas Neue',sans-serif;font-size:3rem;
+  color:rgba(0,212,255,0.06);line-height:1;
+}
+.feature-title{
+  font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:500;
+  margin-bottom:0.8rem;letter-spacing:0.02em;
+}
+.feature-title .hover-text{display:inline-block;transition:color 0.3s}
+.feature-title .hover-text:hover{color:var(--cyan)}
+.feature-desc{font-size:0.88rem;line-height:1.7;color:var(--silver)}
+
+/* PRODUCT SECTION */
+.product-section{
+  padding:8rem 4rem;
+  background:linear-gradient(180deg, var(--black) 0%, var(--deep) 50%, var(--black) 100%);
+  position:relative;overflow:hidden;
+}
+.product-section::before{
+  content:'';position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:800px;
+  background:radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 70%);
+  pointer-events:none;
+}
+.product-inner{max-width:1300px;margin:0 auto;text-align:center}
+.product-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;
+}
+.product-card{
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:4px;padding:3rem 2rem;
+  position:relative;overflow:hidden;transition:all 0.4s;
+  cursor:none;
+}
+.product-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg, rgba(0,212,255,0.04) 0%, transparent 60%);
+  opacity:0;transition:opacity 0.4s;
+}
+.product-card:hover{transform:translateY(-8px);border-color:rgba(0,212,255,0.3)}
+.product-card:hover::after{opacity:1}
+.product-card-top{
+  height:200px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.5rem;position:relative;
+}
+.bottle-placeholder{
+  width:70px;height:160px;
+  border:1px solid rgba(0,212,255,0.3);
+  border-radius:35px 35px 8px 8px;
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg, rgba(0,212,255,0.08) 0%, rgba(0,212,255,0.02) 100%);
+}
+.bottle-placeholder::before{
+  content:'';position:absolute;top:0;left:30%;right:30%;height:20px;
+  background:rgba(0,212,255,0.2);border-radius:0 0 4px 4px;
+}
+.bottle-placeholder::after{
+  content:'';position:absolute;
+  top:15%;left:15%;width:20%;height:40%;
+  background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
+  border-radius:50%;
+}
+.product-name{
+  font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.08em;
+  margin-bottom:0.5rem;
+}
+.product-name .hover-text{display:inline-block;transition:color 0.3s}
+.product-name .hover-text:hover{color:var(--cyan)}
+.product-size{font-size:0.8rem;color:var(--silver);letter-spacing:0.1em;margin-bottom:1.5rem}
+.product-price{
+  font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;
+  color:var(--cyan);margin-bottom:1.5rem;
+}
+.btn-sm{
+  background:transparent;color:var(--cyan);
+  padding:0.6rem 1.8rem;border:1px solid rgba(0,212,255,0.4);border-radius:2px;
+  font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;
+  cursor:none;transition:all 0.3s;font-family:'Inter',sans-serif;
+}
+.btn-sm:hover{background:var(--cyan);color:var(--black)}
+
+/* MARQUEE */
+.marquee-section{
+  padding:2rem 0;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);
+  overflow:hidden;
+}
+.marquee-track{
+  display:flex;gap:4rem;white-space:nowrap;
+  animation:marquee 20s linear infinite;
+}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{
+  font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.2em;
+  color:rgba(255,255,255,0.15);display:flex;align-items:center;gap:1rem;
+}
+.marquee-dot{width:5px;height:5px;background:var(--cyan);border-radius:50%;opacity:0.5}
+
+/* PURITY SECTION */
+.purity-section{
+  padding:8rem 4rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;
+  max-width:1300px;margin:0 auto;
+}
+.purity-visual{
+  position:relative;height:500px;
+  display:flex;align-items:center;justify-content:center;
+}
+.ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(0,212,255,0.15);
+  animation:ring-rotate linear infinite;
+}
+.ring-1{width:300px;height:300px;animation-duration:20s}
+.ring-2{width:380px;height:380px;border-style:dashed;animation-duration:30s;animation-direction:reverse}
+.ring-3{width:460px;height:460px;animation-duration:45s;border-color:rgba(0,212,255,0.07)}
+@keyframes ring-rotate{from{transform:rotateX(70deg) rotate(0deg)}to{transform:rotateX(70deg) rotate(360deg)}}
+.purity-center{
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle, rgba(0,212,255,0.2) 0%, rgba(0,212,255,0.05) 60%, transparent 100%);
+  border:1px solid rgba(0,212,255,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.2em;
+  color:var(--cyan);z-index:2;position:relative;
+  flex-direction:column;gap:0.2rem;
+}
+.purity-center .big-num{font-size:2.5rem;line-height:1}
+.purity-list{list-style:none;margin-top:2rem}
+.purity-list li{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.06);
+  font-size:0.9rem;color:var(--silver);
+}
+.purity-list li::before{
+  content:'';width:6px;height:6px;background:var(--cyan);
+  border-radius:50%;flex-shrink:0;
+}
+.purity-list li strong{color:var(--white);font-weight:500}
+
+/* TESTIMONIAL */
+.testimonial-section{
+  padding:8rem 4rem;text-align:center;
+  background:linear-gradient(180deg, var(--black) 0%, var(--deep) 100%);
+}
+.testimonial-inner{max-width:900px;margin:0 auto}
+.quote-mark{
+  font-family:'Bebas Neue',sans-serif;font-size:8rem;
+  color:rgba(0,212,255,0.1);line-height:0.6;display:block;margin-bottom:1rem;
+}
+.testimonial-text{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.2rem,2.5vw,1.8rem);
+  font-weight:300;line-height:1.5;
+  color:rgba(255,255,255,0.8);margin-bottom:2rem;letter-spacing:0.01em;
+}
+.testimonial-author{
+  font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--silver);
+}
+.testimonial-author strong{color:var(--cyan)}
+
+/* CTA SECTION */
+.cta-section{
+  padding:8rem 4rem;text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'PURELIX';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Bebas Neue',sans-serif;font-size:20rem;font-weight:900;
+  color:rgba(255,255,255,0.02);letter-spacing:0.1em;white-space:nowrap;pointer-events:none;
+}
+.cta-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.cta-title{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,7rem);
+  line-height:0.95;letter-spacing:0.02em;margin-bottom:1.5rem;
+}
+.cta-title .hover-text{display:inline-block;transition:color 0.3s}
+.cta-title .hover-text:hover{color:var(--cyan)}
+.cta-sub{font-size:1rem;color:var(--silver);margin-bottom:2.5rem;line-height:1.6}
+.cta-btns{display:flex;gap:1rem;justify-content:center}
+
+/* FOOTER */
+footer{
+  padding:3rem 4rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.15em;
+  color:rgba(255,255,255,0.4);
+}
+.footer-logo span{color:rgba(0,212,255,0.5)}
+.footer-copy{font-size:0.75rem;color:rgba(255,255,255,0.2);letter-spacing:0.1em}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:var(--cyan)}
+
+/* WATER DROP PARTICLES */
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.particle{
+  position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;
+  animation:float-particle linear infinite;opacity:0;
+}
+@keyframes float-particle{
+  0%{transform:translateY(100vh) translateX(0);opacity:0}
+  10%{opacity:0.6}
+  90%{opacity:0.2}
+  100%{transform:translateY(-10vh) translateX(var(--drift));opacity:0}
+}
+
+/* HOVER TEXT EFFECT */
+.split-hover{display:inline-block;transition:all 0.25s}
+.split-hover:hover{color:var(--cyan);text-shadow:0 0 20px rgba(0,212,255,0.5)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:rgba(0,212,255,0.3);border-radius:2px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1.2rem 2rem}
+  nav.scrolled{padding:0.8rem 2rem}
+  .hero-content{grid-template-columns:1fr;padding:0 2rem;padding-top:6rem}
+  .hero-bottle{display:none}
+  .section{padding:5rem 2rem}
+  .features-grid{grid-template-columns:1fr}
+  .product-cards{grid-template-columns:1fr}
+  .purity-section{grid-template-columns:1fr;gap:4rem;padding:5rem 2rem}
+  footer{flex-direction:column;gap:1.5rem;text-align:center;padding:2rem}
+  .cta-section{padding:5rem 2rem}
+  .testimonial-section{padding:5rem 2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">PURE<span>LIX</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#purity">Purity</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta">Shop Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Premium Hydration</div>
+      <h1>
+        <span class="word-hover split-hover">PURE</span><br>
+        <span class="word-hover split-hover">FROM</span><br>
+        <span class="accent split-hover">SOURCE</span>
+      </h1>
+      <p class="hero-desc">
+        Bottled at the source. Zero compromise. Every drop of PURELIX carries the essence of natural mineral springs — crisp, clean, and perfectly balanced.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-primary">Explore Range</button>
+        <button class="btn-outline">Our Story</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">9<span>.2</span></div>
+          <div class="stat-label">pH Level</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">0<span>ppm</span></div>
+          <div class="stat-label">Contaminants</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">12<span>+</span></div>
+          <div class="stat-label">Minerals</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D BOTTLE SVG -->
+    <div class="hero-bottle">
+      <div class="bottle-glow"></div>
+      <div class="bottle-wrapper" id="bottle3d">
+        <svg class="bottle-svg" viewBox="0 0 200 480" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bottleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:rgba(0,212,255,0.08)"/>
+              <stop offset="30%" style="stop-color:rgba(0,212,255,0.18)"/>
+              <stop offset="60%" style="stop-color:rgba(0,212,255,0.06)"/>
+              <stop offset="100%" style="stop-color:rgba(0,212,255,0.04)"/>
+            </linearGradient>
+            <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(0,212,255,0.4)"/>
+              <stop offset="100%" style="stop-color:rgba(0,100,150,0.6)"/>
+            </linearGradient>
+            <linearGradient id="shineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:transparent"/>
+              <stop offset="40%" style="stop-color:rgba(255,255,255,0.08)"/>
+              <stop offset="60%" style="stop-color:rgba(255,255,255,0.15)"/>
+              <stop offset="100%" style="stop-color:transparent"/>
+            </linearGradient>
+            <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(0,212,255,0.25)"/>
+              <stop offset="100%" style="stop-color:rgba(0,100,180,0.35)"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Cap -->
+          <rect x="72" y="12" width="56" height="8" rx="3" fill="url(#capGrad)" filter="url(#glow)"/>
+          <rect x="68" y="20" width="64" height="28" rx="4" fill="url(#capGrad)"/>
+
+          <!-- Neck -->
+          <path d="M80 48 L74 90 L126 90 L120 48 Z" fill="url(#bottleGrad)" stroke="rgba(0,212,255,0.3)" stroke-width="0.5"/>
+
+          <!-- Shoulder -->
+          <path d="M74 90 Q56 120 52 150 L148 150 Q144 120 126 90 Z" fill="url(#bottleGrad)" stroke="rgba(0,212,255,0.25)" stroke-width="0.5"/>
+
+          <!-- Body -->
+          <path d="M52 150 L44 420 Q44 446 68 446 L132 446 Q156 446 156 420 L148 150 Z"
+                fill="url(#bottleGrad)" stroke="rgba(0,212,255,0.3)" stroke-width="0.8"/>
+
+          <!-- Water fill -->
+          <clipPath id="bottleClip">
+            <path d="M52 150 L44 420 Q44 446 68 446 L132 446 Q156 446 156 420 L148 150 Z"/>
+          </clipPath>
+          <rect x="44" y="220" width="112" height="230" fill="url(#waterGrad)" clip-path="url(#bottleClip)" opacity="0.7"/>
+
+          <!-- Water ripple line -->
+          <path d="M46 222 Q75 210 100 220 Q125 230 154 218" fill="none" stroke="rgba(0,212,255,0.5)" stroke-width="1" opacity="0.8">
+            <animate attributeName="d" values="M46 222 Q75 210 100 220 Q125 230 154 218;M46 218 Q75 228 100 215 Q125 205 154 222;M46 222 Q75 210 100 220 Q125 230 154 218" dur="3s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Shine highlight -->
+          <path d="M52 150 L44 420 Q44 446 68 446 L132 446 Q156 446 156 420 L148 150 Z"
+                fill="url(#shineGrad)"/>
+
+          <!-- Left edge highlight -->
+          <path d="M52 155 L45 400" stroke="rgba(0,212,255,0.2)" stroke-width="1.5" fill="none"/>
+
+          <!-- Right shadow -->
+          <path d="M148 155 L155 400" stroke="rgba(0,0,20,0.4)" stroke-width="3" fill="none"/>
+
+          <!-- Label area -->
+          <rect x="56" y="200" width="88" height="150" rx="3" fill="rgba(0,0,0,0.25)" stroke="rgba(0,212,255,0.15)" stroke-width="0.5"/>
+
+          <!-- Label text -->
+          <text x="100" y="252" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="22" fill="rgba(0,212,255,0.9)" letter-spacing="6" filter="url(#glow)">PURELIX</text>
+          <text x="100" y="272" text-anchor="middle" font-family="'Inter',sans-serif" font-size="7" fill="rgba(255,255,255,0.4)" letter-spacing="3">PREMIUM WATER</text>
+          <line x1="66" y1="282" x2="134" y2="282" stroke="rgba(0,212,255,0.2)" stroke-width="0.5"/>
+          <text x="100" y="298" text-anchor="middle" font-family="'Inter',sans-serif" font-size="6" fill="rgba(255,255,255,0.3)" letter-spacing="2">pH 9.2 · MINERAL RICH</text>
+
+          <!-- Volume text -->
+          <text x="100" y="456" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(0,212,255,0.4)" letter-spacing="2">500 ml</text>
+
+          <!-- Bottom base -->
+          <ellipse cx="100" cy="446" rx="32" ry="6" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.15)" stroke-width="0.5"/>
+
+          <!-- Glow lines on body -->
+          <path d="M56 160 L54 400" stroke="rgba(0,212,255,0.06)" stroke-width="1"/>
+          <path d="M144 160 L146 400" stroke="rgba(0,212,255,0.04)" stroke-width="1"/>
+
+          <!-- Neck ring -->
+          <rect x="74" y="88" width="52" height="4" rx="1" fill="rgba(0,212,255,0.2)" stroke="rgba(0,212,255,0.3)" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Pure at Source <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Zero Contaminants <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Natural Minerals <span class="marquee-dot"></span></span>
+    <span class="marquee-item">pH 9.2 Alkaline <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sustainably Sourced <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Certified Clean <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Pure at Source <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Zero Contaminants <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Natural Minerals <span class="marquee-dot"></span></span>
+    <span class="marquee-item">pH 9.2 Alkaline <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sustainably Sourced <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Certified Clean <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- FEATURES SECTION -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-label">Why Purelix</div>
+    <div class="section-title">
+      <span class="hover-text split-hover">WHAT MAKES</span><br>
+      <span class="hover-text split-hover">US</span> <span style="color:var(--cyan)">DIFFERENT</span>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C12 2 4 9 4 14a8 8 0 0016 0C20 9 12 2 12 2z"/><path d="M12 22v-6M9 19l3 3 3-3"/></svg>
+          <span class="feature-num">01</span>
+        </div>
+        <div class="feature-title"><span class="hover-text split-hover">Source Purity</span></div>
+        <p class="feature-desc">Extracted from protected underground springs untouched by industrial activity. Our source undergoes 47 quality checks before bottling.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="feature-num">02</span>
+        </div>
+        <div class="feature-title"><span class="hover-text split-hover">Zero Processing</span></div>
+        <p class="feature-desc">No artificial treatment. No added minerals. What nature made, we bottle as-is — preserving every trace element in perfect balance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="feature-num">03</span>
+        </div>
+        <div class="feature-title"><span class="hover-text split-hover">Eco Packaging</span></div>
+        <p class="feature-desc">Bottles made from 100% recycled materials. Carbon-neutral shipping. We give back more than we take from the planet.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span class="feature-num">04</span>
+        </div>
+        <div class="feature-title"><span class="hover-text split-hover">Award Winning</span></div>
+        <p class="feature-desc">Recognised by the Global Water Quality Institute as the cleanest bottled water in South Asia, three years running.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span class="feature-num">05</span>
+        </div>
+        <div class="feature-title"><span class="hover-text split-hover">Health First</span></div>
+        <p class="feature-desc">Alkaline pH of 9.2 supports body hydration at a cellular level. Packed with naturally occurring electrolytes your body craves.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          <span class="feature-num">06</span>
+        </div>
+        <div class="feature-title"><span class="hover-text split-hover">Lab Certified</span></div>
+        <p class="feature-desc">Every batch tested in ISO-certified labs. Full transparency — scan any bottle to see the complete mineral profile and source origin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS SECTION -->
+<section class="product-section" id="products">
+  <div class="product-inner">
+    <div class="section-label" style="justify-content:center">Our Range</div>
+    <div class="section-title" style="text-align:center">
+      <span class="hover-text split-hover">THE</span> <span style="color:var(--cyan)">COLLECTION</span>
+    </div>
+    <p style="color:var(--silver);max-width:520px;margin:1rem auto 0;font-size:0.9rem;line-height:1.7">Two sizes. One uncompromising standard of purity. Drop in your bottle images anytime — the silhouettes are ready.</p>
+
+    <div class="product-cards" style="grid-template-columns:1fr 1fr;max-width:860px;margin:4rem auto 0">
+
+      <!-- 500 ML CARD -->
+      <div class="product-card" style="border-color:rgba(0,212,255,0.3)">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--black);font-size:0.65rem;letter-spacing:0.15em;padding:4px 16px;font-weight:700;white-space:nowrap">BESTSELLER</div>
+
+        <div class="product-card-top" style="height:260px;position:relative">
+          <!-- IMAGE SLOT: replace src="" with your bottle image path -->
+          <img class="bottle-img" src="" alt="Purelix 500ml bottle" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <!-- SILHOUETTE (shown when no image) -->
+          <div class="bottle-silhouette" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%">
+            <svg viewBox="0 0 120 300" width="100" height="250" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="sil500g" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(0,212,255,0.04)"/>
+                  <stop offset="35%" stop-color="rgba(0,212,255,0.14)"/>
+                  <stop offset="65%" stop-color="rgba(0,212,255,0.09)"/>
+                  <stop offset="100%" stop-color="rgba(0,212,255,0.03)"/>
+                </linearGradient>
+                <linearGradient id="sil500cap" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(0,212,255,0.5)"/>
+                  <stop offset="100%" stop-color="rgba(0,140,180,0.7)"/>
+                </linearGradient>
+                <linearGradient id="sil500w" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(0,212,255,0.22)"/>
+                  <stop offset="100%" stop-color="rgba(0,100,180,0.32)"/>
+                </linearGradient>
+                <linearGradient id="sil500shine" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="transparent"/>
+                  <stop offset="45%" stop-color="rgba(255,255,255,0.07)"/>
+                  <stop offset="60%" stop-color="rgba(255,255,255,0.13)"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+                <filter id="silglow500">
+                  <feGaussianBlur stdDeviation="2.5" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <clipPath id="clip500">
+                  <path d="M32 92 L26 258 Q26 274 42 274 L78 274 Q94 274 94 258 L88 92 Z"/>
+                </clipPath>
+              </defs>
+              <!-- Cap -->
+              <rect x="44" y="6" width="32" height="6" rx="2" fill="url(#sil500cap)" filter="url(#silglow500)"/>
+              <rect x="42" y="12" width="36" height="18" rx="3" fill="url(#sil500cap)"/>
+              <!-- Neck -->
+              <path d="M49 30 L44 56 L76 56 L71 30 Z" fill="url(#sil500g)" stroke="rgba(0,212,255,0.35)" stroke-width="0.6"/>
+              <!-- Shoulder -->
+              <path d="M44 56 Q30 74 30 92 L90 92 Q90 74 76 56 Z" fill="url(#sil500g)" stroke="rgba(0,212,255,0.28)" stroke-width="0.6"/>
+              <!-- Body -->
+              <path d="M30 92 L26 258 Q26 274 42 274 L78 274 Q94 274 94 258 L90 92 Z" fill="url(#sil500g)" stroke="rgba(0,212,255,0.38)" stroke-width="0.8"/>
+              <!-- Water fill -->
+              <rect x="26" y="158" width="68" height="120" fill="url(#sil500w)" clip-path="url(#clip500)" opacity="0.8"/>
+              <!-- Waterline animated -->
+              <path d="M28 160 Q45 150 60 158 Q75 166 92 156" fill="none" stroke="rgba(0,212,255,0.55)" stroke-width="0.8">
+                <animate attributeName="d" values="M28 160 Q45 150 60 158 Q75 166 92 156;M28 156 Q45 164 60 153 Q75 145 92 160;M28 160 Q45 150 60 158 Q75 166 92 156" dur="3.5s" repeatCount="indefinite"/>
+              </path>
+              <!-- Shine -->
+              <path d="M30 92 L26 258 Q26 274 42 274 L78 274 Q94 274 94 258 L90 92 Z" fill="url(#sil500shine)"/>
+              <!-- Left edge -->
+              <path d="M31 96 L27 252" stroke="rgba(0,212,255,0.18)" stroke-width="1" fill="none"/>
+              <!-- Label zone -->
+              <rect x="34" y="120" width="52" height="90" rx="2" fill="rgba(0,0,0,0.2)" stroke="rgba(0,212,255,0.15)" stroke-width="0.5"/>
+              <!-- Label text -->
+              <text x="60" y="150" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,212,255,0.9)" letter-spacing="4" filter="url(#silglow500)">PURELIX</text>
+              <text x="60" y="164" text-anchor="middle" font-family="'Inter',sans-serif" font-size="4.5" fill="rgba(255,255,255,0.4)" letter-spacing="2">PREMIUM WATER</text>
+              <line x1="40" y1="170" x2="80" y2="170" stroke="rgba(0,212,255,0.18)" stroke-width="0.4"/>
+              <text x="60" y="182" text-anchor="middle" font-family="'Inter',sans-serif" font-size="4" fill="rgba(255,255,255,0.3)" letter-spacing="1.5">pH 9.2 · MINERAL RICH</text>
+              <!-- Neck ring -->
+              <rect x="45" y="54" width="30" height="3" rx="1" fill="rgba(0,212,255,0.22)" stroke="rgba(0,212,255,0.32)" stroke-width="0.4"/>
+              <!-- Bottom ellipse -->
+              <ellipse cx="60" cy="274" rx="18" ry="4" fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.18)" stroke-width="0.5"/>
+              <!-- Volume -->
+              <text x="60" y="284" text-anchor="middle" font-family="'Inter',sans-serif" font-size="5.5" fill="rgba(0,212,255,0.45)" letter-spacing="1.5">500 ml</text>
+              <!-- Ambient glow bottom -->
+              <ellipse cx="60" cy="278" rx="28" ry="8" fill="rgba(0,212,255,0.05)"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="product-name"><span class="hover-text split-hover">PURELIX</span></div>
+        <div class="product-size">500 ml · Daily Hydration</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin:0.8rem 0 1.2rem">
+          <div class="product-price" style="margin:0">Rs. 50</div>
+          <div style="font-size:0.7rem;color:var(--silver);letter-spacing:0.1em">pH 9.2</div>
+        </div>
+        <button class="btn-sm" style="width:100%">Add to Cart</button>
+      </div>
+
+      <!-- 1.5L CARD -->
+      <div class="product-card">
+        <div class="product-card-top" style="height:260px;position:relative">
+          <!-- IMAGE SLOT: replace src="" with your bottle image path -->
+          <img class="bottle-img" src="" alt="Purelix 1.5L bottle" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <!-- SILHOUETTE (shown when no image) -->
+          <div class="bottle-silhouette" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%">
+            <svg viewBox="0 0 140 320" width="110" height="260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="sil15g" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(0,212,255,0.04)"/>
+                  <stop offset="35%" stop-color="rgba(0,212,255,0.13)"/>
+                  <stop offset="65%" stop-color="rgba(0,212,255,0.08)"/>
+                  <stop offset="100%" stop-color="rgba(0,212,255,0.03)"/>
+                </linearGradient>
+                <linearGradient id="sil15cap" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(0,212,255,0.45)"/>
+                  <stop offset="100%" stop-color="rgba(0,130,170,0.65)"/>
+                </linearGradient>
+                <linearGradient id="sil15w" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(0,212,255,0.2)"/>
+                  <stop offset="100%" stop-color="rgba(0,100,180,0.3)"/>
+                </linearGradient>
+                <linearGradient id="sil15shine" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="transparent"/>
+                  <stop offset="42%" stop-color="rgba(255,255,255,0.06)"/>
+                  <stop offset="58%" stop-color="rgba(255,255,255,0.12)"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+                <filter id="silglow15">
+                  <feGaussianBlur stdDeviation="2.5" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <clipPath id="clip15">
+                  <path d="M28 92 L20 282 Q20 298 40 298 L100 298 Q120 298 120 282 L112 92 Z"/>
+                </clipPath>
+              </defs>
+              <!-- Cap (wider for 1.5L) -->
+              <rect x="50" y="6" width="40" height="7" rx="2.5" fill="url(#sil15cap)" filter="url(#silglow15)"/>
+              <rect x="47" y="13" width="46" height="20" rx="3" fill="url(#sil15cap)"/>
+              <!-- Neck -->
+              <path d="M57 33 L50 58 L90 58 L83 33 Z" fill="url(#sil15g)" stroke="rgba(0,212,255,0.33)" stroke-width="0.6"/>
+              <!-- Shoulder (wider) -->
+              <path d="M50 58 Q28 80 28 92 L112 92 Q112 80 90 58 Z" fill="url(#sil15g)" stroke="rgba(0,212,255,0.26)" stroke-width="0.6"/>
+              <!-- Body (taller, wider) -->
+              <path d="M28 92 L20 282 Q20 298 40 298 L100 298 Q120 298 120 282 L112 92 Z" fill="url(#sil15g)" stroke="rgba(0,212,255,0.36)" stroke-width="0.9"/>
+              <!-- Water fill (fuller bottle) -->
+              <rect x="20" y="130" width="100" height="172" fill="url(#sil15w)" clip-path="url(#clip15)" opacity="0.8"/>
+              <!-- Waterline animated -->
+              <path d="M22 132 Q50 120 70 130 Q90 140 118 128" fill="none" stroke="rgba(0,212,255,0.5)" stroke-width="0.9">
+                <animate attributeName="d" values="M22 132 Q50 120 70 130 Q90 140 118 128;M22 128 Q50 138 70 125 Q90 114 118 132;M22 132 Q50 120 70 130 Q90 140 118 128" dur="4s" repeatCount="indefinite"/>
+              </path>
+              <!-- Shine -->
+              <path d="M28 92 L20 282 Q20 298 40 298 L100 298 Q120 298 120 282 L112 92 Z" fill="url(#sil15shine)"/>
+              <!-- Left edge -->
+              <path d="M29 96 L21 276" stroke="rgba(0,212,255,0.16)" stroke-width="1.2" fill="none"/>
+              <!-- Label zone (taller) -->
+              <rect x="32" y="118" width="76" height="110" rx="2" fill="rgba(0,0,0,0.2)" stroke="rgba(0,212,255,0.13)" stroke-width="0.5"/>
+              <!-- Label text -->
+              <text x="70" y="153" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="15" fill="rgba(0,212,255,0.88)" letter-spacing="5" filter="url(#silglow15)">PURELIX</text>
+              <text x="70" y="168" text-anchor="middle" font-family="'Inter',sans-serif" font-size="5" fill="rgba(255,255,255,0.38)" letter-spacing="2">PREMIUM WATER</text>
+              <line x1="40" y1="175" x2="100" y2="175" stroke="rgba(0,212,255,0.16)" stroke-width="0.4"/>
+              <text x="70" y="187" text-anchor="middle" font-family="'Inter',sans-serif" font-size="4.5" fill="rgba(255,255,255,0.28)" letter-spacing="1.5">pH 9.2 · MINERAL RICH</text>
+              <!-- Neck ring -->
+              <rect x="51" y="56" width="38" height="3.5" rx="1" fill="rgba(0,212,255,0.2)" stroke="rgba(0,212,255,0.3)" stroke-width="0.4"/>
+              <!-- Handle indent suggestion (subtle dent lines) -->
+              <path d="M20 180 Q14 200 20 220" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="1.5"/>
+              <path d="M120 180 Q126 200 120 220" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="1.5"/>
+              <!-- Bottom ellipse -->
+              <ellipse cx="70" cy="298" rx="24" ry="5" fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.16)" stroke-width="0.5"/>
+              <!-- Volume -->
+              <text x="70" y="310" text-anchor="middle" font-family="'Inter',sans-serif" font-size="6" fill="rgba(0,212,255,0.42)" letter-spacing="1.5">1.5 L</text>
+              <!-- Ambient glow -->
+              <ellipse cx="70" cy="302" rx="36" ry="9" fill="rgba(0,212,255,0.04)"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="product-name"><span class="hover-text split-hover">PURELIX MAX</span></div>
+        <div class="product-size">1.5 L · Family Size</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin:0.8rem 0 1.2rem">
+          <div class="product-price" style="margin:0">Rs. 100</div>
+          <div style="font-size:0.7rem;color:var(--silver);letter-spacing:0.1em">pH 9.2</div>
+        </div>
+        <button class="btn-sm" style="width:100%">Add to Cart</button>
+      </div>
+
+    </div>
+
+    <!-- HOW TO ADD YOUR IMAGE — instruction strip -->
+    <div style="margin-top:3rem;padding:1.2rem 2rem;border:1px dashed rgba(0,212,255,0.2);border-radius:4px;max-width:860px;margin-left:auto;margin-right:auto;display:flex;align-items:center;gap:1.2rem">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,212,255,0.6)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <p style="font-size:0.78rem;color:var(--silver);line-height:1.5;margin:0"><strong style="color:rgba(0,212,255,0.7)">To add your bottle photos:</strong> Open the file, find the two <code style="background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:2px;font-size:0.75rem">&lt;img class="bottle-img" src=""&gt;</code> tags and replace the empty <code style="background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:2px;font-size:0.75rem">src=""</code> with your image path. The silhouette automatically hides once a valid image loads.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PURITY SECTION -->
+<section id="purity" style="padding:0 4rem">
+  <div class="purity-section">
+    <div class="purity-text">
+      <div class="section-label">The Science</div>
+      <div class="section-title">
+        <span class="hover-text split-hover">PURITY</span><br>
+        <span style="color:var(--cyan)">MEASURED</span>
+      </div>
+      <p style="color:var(--silver);margin-top:1.2rem;font-size:0.9rem;line-height:1.7">We don't just claim purity — we prove it. Every bottle carries a complete mineral profile verified by independent labs.</p>
+      <ul class="purity-list">
+        <li><strong>Calcium 48mg/L</strong> — Bone and muscle support</li>
+        <li><strong>Magnesium 12mg/L</strong> — Nerve function & energy</li>
+        <li><strong>Potassium 6mg/L</strong> — Electrolyte balance</li>
+        <li><strong>Silica 22mg/L</strong> — Skin hydration</li>
+        <li><strong>Total Dissolved Solids 165mg/L</strong> — Ideal mineral balance</li>
+      </ul>
+      <div style="margin-top:2rem;display:flex;gap:1rem">
+        <button class="btn-primary">Download Report</button>
+        <button class="btn-outline">Learn More</button>
+      </div>
+    </div>
+    <div class="purity-visual">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="purity-center">
+        <span class="big-num">9.2</span>
+        <span style="font-size:0.65rem;letter-spacing:0.15em">pH</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section">
+  <div class="testimonial-inner">
+    <span class="quote-mark">"</span>
+    <p class="testimonial-text">Switching to PURELIX was the single best health decision I made this year. You can taste the difference instantly — it's lighter, cleaner, and I feel more hydrated throughout the day.</p>
+    <div class="testimonial-author"><strong>Aisha K.</strong> &nbsp;—&nbsp; Marathon Runner, Karachi</div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content:center">Ready?</div>
+    <div class="cta-title">
+      <span class="hover-text split-hover">DRINK</span><br>
+      <span style="color:var(--cyan)" class="split-hover">PURE.</span><br>
+      <span class="hover-text split-hover">LIVE PURE.</span>
+    </div>
+    <p class="cta-sub">Join over 2 million people who've made the switch to real, clean, mineral water.</p>
+    <div class="cta-btns">
+      <button class="btn-primary">Order Now</button>
+      <button class="btn-outline">Find a Store</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PURE<span>LIX</span></div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Sustainability</a>
+    <a href="#">Wholesale</a>
+  </div>
+  <div class="footer-copy">© 2025 PURELIX. All rights reserved.</div>
+</footer>
+
+<script>
+// CUSTOM CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('button,a,.product-card,.feature-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.width='20px'; cursor.style.height='20px';
+    ring.style.width='54px'; ring.style.height='54px';
+    ring.style.borderColor='rgba(0,212,255,0.7)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.width='12px'; cursor.style.height='12px';
+    ring.style.width='36px'; ring.style.height='36px';
+    ring.style.borderColor='rgba(0,212,255,0.4)';
+  });
+});
+
+// NAVBAR SCROLL GLASS EFFECT
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>60){navbar.classList.add('scrolled')}
+  else{navbar.classList.remove('scrolled')}
+});
+
+// BOTTLE CURSOR PARALLAX
+const bottle = document.getElementById('bottle3d');
+if(bottle){
+  document.addEventListener('mousemove',e=>{
+    const cx=window.innerWidth/2, cy=window.innerHeight/2;
+    const dx=(e.clientX-cx)/cx, dy=(e.clientY-cy)/cy;
+    bottle.style.transform=`rotateY(${dx*18}deg) rotateX(${-dy*10}deg) translateZ(20px)`;
+  });
+  document.addEventListener('mouseleave',()=>{
+    bottle.style.transform='rotateY(0deg) rotateX(0deg) translateZ(0)';
+  });
+}
+
+// FLOATING PARTICLES
+const pContainer = document.getElementById('particles');
+function spawnParticle(){
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const x = Math.random()*100;
+  const dur = 8+Math.random()*12;
+  const drift = (Math.random()-0.5)*200;
+  p.style.cssText=`left:${x}%;animation-duration:${dur}s;--drift:${drift}px;animation-delay:${Math.random()*8}s;opacity:0`;
+  pContainer.appendChild(p);
+  setTimeout(()=>p.remove(), (dur+8)*1000);
+}
+for(let i=0;i<30;i++) setTimeout(spawnParticle, i*400);
+setInterval(spawnParticle, 1200);
+
+// INTERSECTION OBSERVER — fade in sections
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.feature-card,.product-card,.purity-visual,.section-title').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(30px)';
+  el.style.transition='opacity 0.7s ease, transform 0.7s ease';
+  observer.observe(el);
+});
+
+// SPLIT TEXT HOVER — char by char
+document.querySelectorAll('.split-hover').forEach(el=>{
+  const text = el.textContent;
+  el.innerHTML = text.split('').map(c=>
+    c===' ' ? ' ' : `<span style="display:inline-block;transition:color 0.15s,transform 0.15s">${c}</span>`
+  ).join('');
+  el.addEventListener('mousemove',e=>{
+    const chars = el.querySelectorAll('span');
+    const rect = el.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    chars.forEach(ch=>{
+      const cr = ch.getBoundingClientRect();
+      const cx = cr.left - rect.left + cr.width/2;
+      const dist = Math.abs(mx - cx);
+      if(dist < 40){
+        ch.style.color='#00d4ff';
+        ch.style.textShadow='0 0 15px rgba(0,212,255,0.7)';
+        ch.style.transform=`translateY(-${Math.max(0,4-dist/10)}px)`;
+      } else {
+        ch.style.color='';
+        ch.style.textShadow='';
+        ch.style.transform='';
+      }
+    });
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.querySelectorAll('span').forEach(ch=>{
+      ch.style.color=''; ch.style.textShadow=''; ch.style.transform='';
+    });
+  });
+});
+</script>
+</body>
+</html>

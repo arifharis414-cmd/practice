@@ -1,0 +1,188 @@
+/* ============================================================
+   HOW CSS GETS APPLIED TO HTML — 3 ways (pick one, usually #3)
+   ============================================================
+
+   1. INLINE  (on one element, avoid this — hard to maintain)
+      <p style="color: red;">Text</p>
+
+   2. INTERNAL (inside a <style> tag in the HTML <head>)
+      <style> p { color: red; } </style>
+
+   3. EXTERNAL (this file, linked from HTML — the standard way)
+      In your HTML <head>, add:
+      <link rel="stylesheet" href="css-everything-reference.css">
+*/
+
+
+/* ============================================================
+   1. SELECTORS — how you target which HTML to style
+   ============================================================ */
+
+/* Element selector — targets every <p> tag on the page */
+p {
+  color: #bb0c0c;
+}
+
+/* Class selector (the dot) — targets any element with class="highlight" */
+.highlight {
+  background: rgb(255, 255, 147);
+}
+
+/* ID selector (the hash) — targets the ONE element with id="main-title" (IDs must be unique) */
+#main-title {
+  text-transform: uppercase;
+}
+
+/* Descendant selector — targets <a> tags that are INSIDE a <nav> */
+nav a {
+  margin-right: 12px;
+  text-decoration: none;
+}
+
+/* Group selector — apply the same rule to multiple selectors at once */
+h1, h2, h3 {
+  font-family: Arial, sans-serif;
+}
+
+/* Pseudo-class — styles an element only in a certain STATE */
+a:hover {
+  text-decoration: underline;
+}
+li:first-child {
+  font-weight: bold;
+}
+
+
+/* ============================================================
+   2. COLORS & BACKGROUNDS
+   ============================================================ */
+
+body {
+  color: #222222;              /* text color — hex code */
+  background-color: #f9f9f9;   /* page background */
+}
+
+.info-box {
+  background-color: rgb(219, 234, 254);   /* rgb() works too */
+  border: 1px solid rgba(29, 78, 216, 0.4); /* rgba() = rgb + transparency (alpha) */
+}
+
+
+/* ============================================================
+   3. TYPOGRAPHY (text styling)
+   ============================================================ */
+
+body {
+  font-family: Arial, sans-serif; /* fallback fonts, comma separated */
+  font-size: 16px;
+  line-height: 1.6;               /* spacing between lines of text */
+}
+
+h2 {
+  font-weight: 700;   /* 400 = normal, 700 = bold */
+  font-style: normal;  /* or italic */
+}
+
+.center-text {
+  text-align: center; /* left | right | center | justify */
+}
+
+.muted {
+  text-decoration: none; /* underline | line-through | none */
+  letter-spacing: 0.5px;
+}
+
+
+/* ============================================================
+   4. THE BOX MODEL — every element is a rectangular box made of:
+      content -> padding -> border -> margin
+   ============================================================ */
+
+.card {
+  width: 300px;
+  height: 150px;
+  padding: 20px;        /* space INSIDE the border, around the content */
+  border: 2px solid #1d4ed8;
+  margin: 16px;          /* space OUTSIDE the border, pushing other elements away */
+  box-sizing: border-box; /* makes width/height include padding+border (avoids surprises) */
+}
+
+
+/* ============================================================
+   5. DISPLAY & POSITIONING
+   ============================================================ */
+
+.block-example {
+  display: block;        /* takes the full width, starts on a new line (e.g. <div>, <p>) */
+}
+.inline-example {
+  display: inline;       /* only as wide as its content, stays in the text flow (e.g. <span>) */
+}
+.hidden-example {
+  display: none;         /* removes the element completely (not even invisible space left) */
+}
+
+.relative-box {
+  position: relative;    /* positioned relative to where it WOULD normally be */
+  top: 10px;
+}
+.fixed-box {
+  position: fixed;       /* stays in place even when the page scrolls */
+  bottom: 16px;
+  right: 16px;
+}
+
+
+/* ============================================================
+   6. FLEXBOX — the easiest way to line things up in a row/column
+   ============================================================ */
+
+.flex-row {
+  display: flex;
+  flex-direction: row;        /* row = side by side, column = stacked */
+  justify-content: space-between; /* spacing along the main axis */
+  align-items: center;            /* alignment along the cross axis */
+  gap: 12px;                      /* space between flex items */
+}
+
+
+/* ============================================================
+   7. GRID — for two-dimensional (rows AND columns) layouts
+   ============================================================ */
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 equal-width columns */
+  gap: 16px;
+}
+
+
+/* ============================================================
+   8. TRANSITIONS — smooth animation between two states
+   ============================================================ */
+
+.button {
+  background: #1d4ed8;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: background 0.2s ease; /* animates the change instead of snapping instantly */
+}
+.button:hover {
+  background: #1e40af; /* combined with the transition above, this fades smoothly */
+}
+
+
+/* ============================================================
+   9. RESPONSIVE DESIGN — different styles for different screen sizes
+   ============================================================ */
+
+@media (max-width: 600px) {
+  /* Everything inside here only applies on screens 600px wide or narrower (phones) */
+  body {
+    font-size: 14px;
+  }
+  .grid-layout {
+    grid-template-columns: 1fr; /* stack into a single column on small screens */
+  }
+}
