@@ -21,7 +21,7 @@ html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
 
 /* CUSTOM CURSOR */
-#cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:screen}
+#cursor{margin-top:2rem;position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:screen}
 #cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,212,255,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.08s ease}
 
 /* NAV */
@@ -30,6 +30,7 @@ nav{
   padding:1.4rem 4rem;
   display:flex;align-items:center;justify-content:space-between;
   transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+  margin-bottom:2rem;
 }
 nav.scrolled{
   background:rgba(5,5,8,0.4);
@@ -82,7 +83,7 @@ nav.scrolled .nav-links a{
   background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,100,180,0.12) 0%, transparent 70%),
              radial-gradient(ellipse 40% 40% at 80% 60%, rgba(0,212,255,0.06) 0%, transparent 60%),
              var(--black);
-}
+} v 
 .hero-bg-lines{
   position:absolute;inset:0;pointer-events:none;
   background-image:
@@ -743,7 +744,7 @@ footer{
                 <filter id="silglow500">
                   <feGaussianBlur stdDeviation="2.5" result="b"/>
                   <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
+                       </filter>
                 <clipPath id="clip500">
                   <path d="M32 92 L26 258 Q26 274 42 274 L78 274 Q94 274 94 258 L88 92 Z"/>
                 </clipPath>
